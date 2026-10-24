@@ -1,0 +1,125 @@
+{
+  "title": "Access to General Practitioners in France",
+  "metadata": {
+    "author": "Yanis AMARA",
+    "student_number": "20232166",
+    "group": "DE2",
+    "email": "Yanis.amara@efrei.net",
+    "institution": "EFREI",
+    "programme": "DATA ENGINEERING",
+    "academic_year": "2026-2027",
+    "course": "Data Analysis & Visualization",
+    "professor": "Dr. Mano MATHEW",
+    "linkedin": "https://www.linkedin.com/in/yanis-amara-3a3953292/",
+    "python_version": "3.13.16",
+    "archive_name": "StApp26_20232166_AMARA_DE2.zip",
+    "app_url": null,
+    "repository_url": null,
+    "demo_video_url": null
+  },
+  "sections": [
+    {
+      "title": "1. Motivation and research question",
+      "paragraphs": [
+        "I chose this topic because of my upcoming healthcare research internship and my interest in territorial inequalities in access to care. A national figure can conceal very different local situations.",
+        "The main question is: how does potential access to general practitioners vary across France, and where did it decline between 2023 and 2024? The intended audience is municipalities, healthcare centres and regional health authorities."
+      ]
+    },
+    {
+      "title": "2. Data and method",
+      "paragraphs": [
+        "The main dataset is DREES Localised Potential Accessibility (APL), referenced on data.gouv.fr. The analysis covers France excluding Mayotte and focuses on GPs aged 65 or younger. [1]",
+        "APL describes annual accessible consultations, home visits and teleconsultations per age-standardised inhabitant. Department and national averages are weighted by standardised population. Actual population is used for resident counts and population shares. [2, 3]",
+        "The 2024 table contains 34,890 geographical units across 100 departments and represents 67,760,573 residents using the 2022 population reference. The 2023 APL observations use the 2021 population reference."
+      ]
+    },
+    {
+      "title": "3. Preparation and validation",
+      "paragraphs": [
+        "Preparation preserves commune codes as strings, standardises column names, records reference years and joins department names. Numerical checks cover non-finite and negative values, age-subset consistency and population values.",
+        "The core prepared fields contain 0 missing values and 0 duplicate commune-year pairs. Zero APL values are retained. Three zero-population observations in 2023 are retained and flagged; they contribute no population weight.",
+        "The geography differs between years: 68 codes occur only in 2023 and 4 only in 2024. Each year is therefore aggregated independently. Unmatched codes are not interpreted as practice openings or closures.",
+        "High values are retained. Removing the five highest 2024 APL observations changes the national estimate from 3.258882 to 3.258369. This sensitivity check indicates limited influence on the national average, without explaining those local values."
+      ]
+    },
+    {
+      "title": "4. National and departmental findings",
+      "paragraphs": [
+        "National weighted APL decreased from 3.295 in 2023 to 3.259 in 2024, a change of -1.09%. 79 of 100 departments recorded a decrease.",
+        "50 departments combined below-national APL in 2024 with a decline since 2023. They contained 25,788,500 residents, or 38.1% of the covered population using the 2022 reference.",
+        "These results identify territories for closer investigation. They do not mean every resident of those departments experiences low access, and the national average is not an official shortage threshold."
+      ]
+    },
+    {
+      "title": "5. Local case study: Guyane",
+      "paragraphs": [
+        "Guyane's departmental APL was 1.414, compared with 3.259 nationally. Among its 22 communes, 12 had zero APL for GPs aged 65 or younger. These communes contained 47,077 residents (16.3% of the department population).",
+        "2 of these communes have positive APL when GPs of all ages are included. Zero values must therefore be interpreted within the indicator's professional and age scope; they do not establish an absence of all healthcare."
+      ]
+    },
+    {
+      "title": "6. Teleconsultations and policy context",
+      "paragraphs": [
+        "Teleconsultations are included in APL activity. However, this workbook does not separate remote care from in-person care, identify platforms such as Doctolib, or quantify how far remote care offsets isolation. [3]",
+        "A separate DREES study of adults in metropolitan France found that 21% of large urban-centre residents used teleconsultation in 2024, compared with around 10% in rural areas. Among teleconsultation users, 43% cited long waits for in-person appointments. This study includes GPs and specialists and does not support assuming that the most isolated residents use remote care most. [4]",
+        "Policy context checked on 23 October 2026 includes Un médecin près de chez vous, operating since September 2025 in 153 priority territories with voluntary participation in its pilot implementation, and the France Santé network, whose June 2026 circular sets a target of 5,000 labelled structures by 2027. These are programme descriptions and targets, not effects demonstrated here. The 2023–2024 observations predate these initiatives and cannot evaluate their effectiveness. [5, 6]"
+      ]
+    },
+    {
+      "title": "7. Dashboard design and reproducibility",
+      "paragraphs": [
+        "The dashboard follows a sequence from national context to department comparisons, geography, local distributions, recent change and implications. Four interactive charts provide hover information. Sidebar filters update the KPIs and analytical selection; the map focus controls the displayed geography.",
+        "The application uses modular Python files, cached loading, prepared CSV tables and a fixed map colour scale. Source fingerprints, pinned requirements and a complete dependency lock are included. Four filter scenarios passed in a fresh virtual environment. Full visual review remains separate from these execution checks."
+      ]
+    },
+    {
+      "title": "8. Limitations and implications",
+      "paragraphs": [
+        "APL measures potential access rather than actual waiting times, acceptance of new patients, affordability or care quality. Department averages hide local differences. Changes are descriptive and do not establish causes. Population standardisation does not fully account for evolving needs caused by national population ageing between years. [2]",
+        "Local decision-makers can use these results to structure discussions about staffing, transport, appointment availability and digital access. The next step is to combine the geographical signals with local service information and later APL releases before evaluating interventions."
+      ]
+    }
+  ],
+  "references": [
+    {
+      "id": 1,
+      "title": "DREES APL dataset",
+      "url": "https://www.data.gouv.fr/datasets/accessibilite-potentielle-localisee-apl-aux-professionnels-de-sante"
+    },
+    {
+      "id": 2,
+      "title": "DREES methodological notice",
+      "url": "https://data.drees.solidarites-sante.gouv.fr/api/v2/catalog/datasets/530_l-accessibilite-potentielle-localisee-apl/attachments/apl_lisez_moi_pdf"
+    },
+    {
+      "id": 3,
+      "title": "DREES: access to primary care in 2024",
+      "url": "https://drees.solidarites-sante.gouv.fr/communique-de-presse-jeux-de-donnees/jeux-de-donnees/260722-accessibilite-aux-soins-de-premier-recours-en-2024"
+    },
+    {
+      "id": 4,
+      "title": "DREES: teleconsultations, ER 1366",
+      "url": "https://drees.solidarites-sante.gouv.fr/publications-communique-de-presse/etudes-et-resultats/260212-recours-aux-t%C3%A9l%C3%A9consultations"
+    },
+    {
+      "id": 5,
+      "title": "Ministry: Un médecin près de chez vous",
+      "url": "https://sante.gouv.fr/grands-dossiers/un-meilleur-acces-aux-soins-pour-tous-sur-le-territoire/article/pacte-de-lutte-contre-les-deserts-medicaux-151-zones-prioritaires-identifiees"
+    },
+    {
+      "id": 6,
+      "title": "France Santé circular, 16 June 2026",
+      "url": "https://bulletins-officiels.social.gouv.fr/circulaire-interministerielle-ndeg-dgossdasas2dgclsdcatc3202686-du-16-juin-2026-relative-au-deploiement-et-au-financement-du-reseau-france-sante"
+    },
+    {
+      "id": 7,
+      "title": "Etalab/IGN department boundaries — ODbL",
+      "url": "https://www.data.gouv.fr/datasets/contours-administratifs"
+    },
+    {
+      "id": 8,
+      "title": "French geographic API: department names",
+      "url": "https://geo.api.gouv.fr/departements"
+    }
+  ]
+}

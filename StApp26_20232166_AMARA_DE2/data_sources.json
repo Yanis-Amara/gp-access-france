@@ -1,0 +1,30 @@
+{
+  "snapshot_recorded_on": "2026-10-23",
+  "apl_years_used": [
+    2023,
+    2024
+  ],
+  "resources": [
+    {
+      "name": "DREES APL workbook",
+      "path": "data/raw/apl_general_practitioners.xlsx",
+      "url": "https://data.drees.solidarites-sante.gouv.fr/api/v2/catalog/datasets/530_l-accessibilite-potentielle-localisee-apl/attachments/indicateur_d_apl_aux_medecins_generalistes_xlsx",
+      "licence": "Open Licence 2.0",
+      "sha256": "21c73deff57dc7a83a3cd6fcfd5b5ceb8c7a40e98590a50b5b1194f2dd4d75a2"
+    },
+    {
+      "name": "Department boundaries, 2024",
+      "path": "assets/departments_2024.geojson",
+      "url": "https://etalab-datasets.geo.data.gouv.fr/2024/geojson/departements-1000m.geojson",
+      "licence": "ODbL",
+      "sha256": "1fbe757c45d3f1717a42883ea3ba752934dace010ceaf3b6d30311fea95715fe"
+    },
+    {
+      "name": "EFREI logo",
+      "path": "assets/efrei_logo.png",
+      "url": "https://www.efrei.fr/wp-content/uploads/2025/09/Logo-Efrei-CMJN-scaled.png",
+      "licence": "EFREI branding; not covered by the data licences",
+      "sha256": "6a949e932c5f385468c63b40a35964ba38274ecd2dea8a8eb0c6804f65e51347"
+    }
+  ]
+}
